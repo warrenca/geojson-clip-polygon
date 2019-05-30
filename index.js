@@ -1,10 +1,10 @@
-var intersect = require('turf-intersect')
-var buffer = require('turf-buffer')
-var area = require('turf-area')
-var extent = require('turf-extent')
-var envelope = require('turf-envelope')
-var explode = require('turf-explode')
-var inside = require('turf-inside')
+var intersect = require('@turf/intersect').default
+var buffer = require('@turf/buffer').default
+var area = require('@turf/area').default
+var extent = require('@turf/bbox').default
+var envelope = require('@turf/envelope').default
+var explode = require('@turf/explode').default
+var inside = require('@turf/boolean-point-in-polygon').default
 
 /**
  * Clip a polygon feature to the given boundary polygon, copying properties
@@ -74,7 +74,7 @@ function isInside (feature, poly) {
   return points.features.map(function (pt) {
     return inside(pt, poly)
   })
-  .reduce(function (a, b) { return a && b }, true)
+    .reduce(function (a, b) { return a && b }, true)
 }
 
 function clipPolygon (poly, feature) {

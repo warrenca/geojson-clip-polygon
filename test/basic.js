@@ -2,6 +2,7 @@ var clip = require('../')
 var test = require('tape')
 var glob = require('glob')
 var fs = require('fs')
+var path = require('path')
 
 var UPDATE = process.env.UPDATE
 
@@ -11,7 +12,8 @@ var UPDATE = process.env.UPDATE
  * https://github.com/Turfjs/turf-intersect/blob/master/test/test.js
  */
 test('basic', function (t) {
-  glob.sync(__dirname + '/fixtures/in/*.json').forEach(function (input) {
+  var fixturePath = path.join(__dirname, 'fixtures/in/*.json')
+  glob.sync(fixturePath).forEach(function (input) {
     var features = JSON.parse(fs.readFileSync(input))
     var output = clip(features[0], features[1])
     if (UPDATE) {
